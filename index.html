@@ -1,3 +1,4 @@
+<!-- Đây là file INDEX1.HTML đã được cập nhật thẻ PNG và Giữ sáng màn hình -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -5,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC Algebra 8 - Giao Lưu Toán Học</title>
     
-    <!-- Tải Tailwind CSS để giao diện vẫn lung linh như cũ -->
+    <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Cấu hình các thư viện React tải trực tiếp từ web -->
+    <!-- Cấu hình các thư viện React -->
     <script type="importmap">
     {
         "imports": {
@@ -18,7 +19,7 @@
         }
     }
     </script>
-    <!-- Trình biên dịch JSX chạy ngay trên trình duyệt -->
+    <!-- Trình biên dịch JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 overflow-x-hidden relative min-h-screen">
@@ -28,7 +29,8 @@
     <script type="text/babel" data-type="module">
         import React, { useState, useEffect } from 'react';
         import { createRoot } from 'react-dom/client';
-        import { Trophy, Play, Home, Star, CheckCircle, XCircle, ArrowRight, BookOpen, Volume2, VolumeX, Shield, Swords, Zap, Settings, Lock, PlusCircle, Save, Database, Users, HelpCircle } from 'lucide-react';
+        // Đã bổ sung các icon cần thiết cho bộ thẻ mới và Wake Lock (Sun, Sparkles, Users...)
+        import { Trophy, Play, Home, CheckCircle, XCircle, ArrowRight, Volume2, VolumeX, Shield, Swords, Zap, Settings, Lock, PlusCircle, Save, Database, Users, HelpCircle, Sun, Sparkles } from 'lucide-react';
 
         const DEFAULT_QUESTIONS = [
             { id: 1, text: 'Khai triển hằng đẳng thức: (x + y)²', options: ['x² + 2xy + y²', 'x² + xy + y²', 'x² - 2xy + y²', 'x² + y²'], correct: 0 },
@@ -48,138 +50,47 @@
             { id: 15, text: 'Phân tích thành nhân tử: 3x² - 3y²', options: ['3(x-y)²', '3(x-y)(x+y)', '(3x-3y)(x+y)', '3x(x-y)'], correct: 1 },
             { id: 16, text: 'Tìm x biết: x² - 9 = 0', options: ['x = 3 hoặc x = -3', 'x = 9', 'x = -3', 'x = 3'], correct: 0 },
             { id: 17, text: 'Khai triển biểu thức: (2x + 1)²', options: ['4x² + 4x + 1', '2x² + 4x + 1', '4x² + 2x + 1', '4x² + 1'], correct: 0 },
-            { id: 18, text: 'Thu gọn đa thức: (x - 2)(x + 2) - x(x - 1)', options: ['x - 4', '-2x - 4', 'x + 4', '2x - 4'], correct: 0 },
-            
+            { id: 18, text: 'Thu gọn đa thức: (x - 2)(x + 2) - x(x - 1)', options: ['x - 4', '-2x - 4', 'x + 4', '2x - 4'], correct: 0 }
         ];
 
+        // =========================================================================
+        // KHUNG MẪU CẦU THỦ BẰNG ẢNH PNG (Bạn có thể thêm nhiều cầu thủ dựa trên cấu trúc này)
+        // =========================================================================
         const PLAYERS = [
             { 
-                id: 'p1', name: 'Kiều Lương Tâm', ovr: 126, pos: 'ST', nation: '🇻🇳', club: 'ĐTVN', 
-                rarity: 'bg-gradient-to-br from-fuchsia-600 via-purple-900 to-pink-700', textColors: 'text-yellow-300', tier: 'MYTHIC', 
-                stats: { pac: 125, sho: 126, pas: 120, dri: 124, def: 60, phy: 115 },
-                celebration: 'Bắn tim hướng khán đài & Chào kiểu quân đội', record: 'Vua phá lưới mọi thời đại với tỉ lệ ghi bàn 100% trong mọi trận đấu.',
-                // BẠN ĐIỀN TÊN FILE ẢNH VÀO ĐÂY (NẾU CÓ). VÍ DỤ: './assets/kieu_luong_tam.png'
-                image: '' 
+                id: 'messi', 
+                name: 'Lionel Messi', 
+                season: 'GOAT Legend 2026', 
+                pos: 'RW', 
+                nation: '🇦🇷 Argentina', 
+                club: 'Inter Miami', 
+                image: './assets/messi.png', // Đổi đường dẫn ảnh thẻ thật của bạn ở đây
+                funFact: 'Huyền thoại sở hữu 8 Quả bóng vàng, vô địch World Cup 2022 và hơn 800 bàn thắng trong sự nghiệp.',
+                celebration: 'Chỉ hai tay lên trời tri ân người bà quá cố' 
             },
             { 
-                id: 'p2', name: 'David Beckham', ovr: 125, pos: 'RM', nation: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', club: 'ICONS', 
-                rarity: 'bg-gradient-to-br from-yellow-300 via-amber-600 to-yellow-900', textColors: 'text-white', tier: 'ICON', 
-                stats: { pac: 110, sho: 118, pas: 126, dri: 115, def: 80, phy: 90 },
-                celebration: 'Giơ tay ăn mừng kinh điển & Hôn nhẫn cưới', record: 'Bậc thầy sút phạt huyền thoại với đường cong hiểm hóc.',
-                image: '' // './assets/beckham.png'
-            },
-            { 
-                id: 'p3', name: 'Erling Haaland', ovr: 124, pos: 'ST', nation: '🇳🇴', club: 'MCI', 
-                rarity: 'bg-gradient-to-br from-cyan-300 via-blue-600 to-indigo-900', textColors: 'text-white', tier: 'TOTY', 
-                stats: { pac: 118, sho: 125, pas: 85, dri: 100, def: 55, phy: 122 },
-                celebration: 'Ngồi thiền định tĩnh tâm (Meditation)', record: 'Cỗ máy săn bàn vô địch Ngoại hạng Anh với tốc độ và thể lực khủng khiếp.',
-                image: ''
-            },
-            { 
-                id: 'p4', name: 'Lionel Messi', ovr: 126, pos: 'RW', nation: '🇦🇷', club: 'INTER', 
-                rarity: 'bg-gradient-to-br from-sky-400 via-blue-700 to-indigo-950', textColors: 'text-white', tier: 'GOAT', 
-                stats: { pac: 120, sho: 125, pas: 126, dri: 127, def: 50, phy: 92 },
-                celebration: 'Chỉ tay lên trời tri ân người bà', record: 'Cầu thủ sở hữu nhiều Quả bóng vàng nhất lịch sử bóng đá thế giới.',
-                image: './assets/messi.png' // <-- Mẫu: ảnh nằm trong thư mục assets
-            },
-            { 
-                id: 'p5', name: 'Cristiano Ronaldo', ovr: 125, pos: 'ST', nation: '🇵🇹', club: 'AL NASSR', 
-                rarity: 'bg-gradient-to-br from-emerald-500 via-slate-800 to-black', textColors: 'text-yellow-400', tier: 'GOAT', 
-                stats: { pac: 122, sho: 126, pas: 110, dri: 115, def: 55, phy: 120 },
-                celebration: 'SIUUUUU! (Bật nhảy xoay người góc sân)', record: 'Ghi hơn 900 bàn thắng chính thức, biểu tượng của sự nỗ lực.',
-                image: '' // <-- Mẫu: thay ảnh Ronaldo tại đây
-            },
-            { 
-                id: 'p6', name: 'Jude Bellingham', ovr: 123, pos: 'CM', nation: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', club: 'REAL', 
-                rarity: 'bg-gradient-to-br from-amber-400 via-orange-600 to-zinc-900', textColors: 'text-white', tier: 'TOTY', 
-                stats: { pac: 115, sho: 116, pas: 118, dri: 120, def: 95, phy: 112 },
-                celebration: 'Mở rộng hai tay hướng về phía khán giả (Bellingham pose)', record: 'Cầu thủ trẻ tỏa sáng rực rỡ tại La Liga và Champions League.',
-                image: ''
-            },
-            { 
-                id: 'p7', name: 'Lamine Yamal', ovr: 121, pos: 'RW', nation: '🇪🇸', club: 'BARCA', 
-                rarity: 'bg-gradient-to-br from-red-600 via-blue-900 to-slate-900', textColors: 'text-cyan-300', tier: 'WONDERKID', 
-                stats: { pac: 122, sho: 110, pas: 115, dri: 124, def: 45, phy: 85 },
-                celebration: 'Ký hiệu số 304 (Mã vùng quê nhà Rocafonda)', record: 'Nhà vô địch Euro trẻ nhất lịch sử cùng đội tuyển Tây Ban Nha.',
-                image: './assets/yamal.png' // <-- Mẫu
-            },
-            { 
-                id: 'p8', name: 'Nguyễn Quang Hải', ovr: 120, pos: 'CAM', nation: '🇻🇳', club: 'CAHN', 
-                rarity: 'bg-gradient-to-br from-red-600 via-yellow-600 to-amber-900', textColors: 'text-white', tier: 'ELITE', 
-                stats: { pac: 105, sho: 112, pas: 122, dri: 120, def: 70, phy: 85 },
-                celebration: 'Vẽ cầu vồng trên tuyết & Chạy ăn mừng cảm xúc', record: 'Tác giả của siêu phẩm "Cầu vồng tuyết" tại Thường Châu 2018.',
-                image: ''
-            },
-            { 
-                id: 'p9', name: 'Nguyễn Đình Bắc', ovr: 116, pos: 'LW', nation: '🇻🇳', club: 'CAHN', 
-                rarity: 'bg-gradient-to-br from-red-500 via-rose-800 to-zinc-900', textColors: 'text-white', tier: 'PRO', 
-                stats: { pac: 118, sho: 110, pas: 102, dri: 115, def: 50, phy: 90 },
-                celebration: 'Đặt tay lên ngực áo & Hò reo cuồng nhiệt', record: 'Sao trẻ vụt sáng với pha lập công đẳng cấp vào lưới ĐT Nhật Bản tại Asian Cup.',
-                image: ''
-            },
-            { 
-                id: 'p10', name: 'Nguyễn Hai Long', ovr: 115, pos: 'CM', nation: '🇻🇳', club: 'HN FC', 
-                rarity: 'bg-gradient-to-br from-purple-600 via-blue-800 to-slate-900', textColors: 'text-white', tier: 'PRO', 
-                stats: { pac: 108, sho: 105, pas: 116, dri: 114, def: 82, phy: 95 },
-                celebration: 'Bắn tim góc sân & Ôm đồng đội', record: 'Tiền vệ kiến thiết tài hoa với những đường chuyền sáng nước.',
-                image: ''
-            },
-            { 
-                id: 'p11', name: 'Petr Cech', ovr: 122, pos: 'GK', nation: '🇨🇿', club: 'ICONS', 
-                rarity: 'bg-gradient-to-br from-cyan-600 via-slate-700 to-black', textColors: 'text-white', tier: 'ICON', 
-                stats: { pac: 112, sho: 120, pas: 108, dri: 118, def: 78, phy: 116 }, isGk: true,
-                celebration: 'Chỉ tay chỉ đạo hàng thủ & Đấm bóng ăn mừng', record: 'Kỷ lục gia giữ sạch lưới nhiều trận nhất lịch sử Ngoại hạng Anh (202 trận).',
-                image: ''
-            },
-            { 
-                id: 'p12', name: 'Alisson Becker', ovr: 122, pos: 'GK', nation: '🇧🇷', club: 'LIV', 
-                rarity: 'bg-gradient-to-br from-emerald-400 via-teal-700 to-green-900', textColors: 'text-white', tier: 'TOTS', 
-                stats: { pac: 115, sho: 120, pas: 110, dri: 122, def: 75, phy: 118 }, isGk: true,
-                celebration: 'Quỳ gối đấm tay mạnh mẽ', record: 'Thủ môn từng ghi bàn thắng đánh đầu quyết định phút bù giờ tại Ngoại hạng Anh.',
-                image: ''
-            },
-            { 
-                id: 'p13', name: 'Declan Rice', ovr: 120, pos: 'CDM', nation: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', club: 'ARS', 
-                rarity: 'bg-gradient-to-br from-red-500 via-red-800 to-black', textColors: 'text-gray-100', tier: 'ELITE', 
-                stats: { pac: 95, sho: 90, pas: 112, dri: 105, def: 120, phy: 115 },
-                celebration: 'Khuỵu gối ăn mừng máu lửa', record: 'Hòn đá tảng tuyến giữa với khả năng đánh chặn và thu hồi bóng đỉnh cao.',
-                image: ''
-            },
-            { 
-                id: 'p14', name: 'Gregor Kobel', ovr: 118, pos: 'GK', nation: '🇨🇭', club: 'DOR', 
-                rarity: 'bg-gradient-to-br from-yellow-400 via-yellow-700 to-zinc-900', textColors: 'text-white', tier: 'PRO', 
-                stats: { pac: 112, sho: 115, pas: 105, dri: 118, def: 60, phy: 110 }, isGk: true,
-                celebration: 'Gồng tay ăn mừng uy lực', record: 'Người gác đền số 1 của Borussia Dortmund với những pha cứu thua xuất thần.',
-                image: ''
-            },
-            { 
-                id: 'p15', name: 'Nguyễn Xuân Son', ovr: 117, pos: 'ST', nation: '🇻🇳', club: 'NAM', 
-                rarity: 'bg-gradient-to-br from-red-500 via-orange-600 to-yellow-700', textColors: 'text-yellow-100', tier: 'HERO', 
-                stats: { pac: 115, sho: 117, pas: 90, dri: 105, def: 45, phy: 110 },
-                celebration: 'Mừng bàn thắng cuồng nhiệt cùng các đồng đội', record: 'Vua phá lưới V-League với hiệu suất ghi bàn cực khủng.',
-                image: ''
-            },
-            { 
-                id: 'p16', name: 'Quế Ngọc Hải', ovr: 115, pos: 'CB', nation: '🇻🇳', club: 'BFC', 
-                rarity: 'bg-gradient-to-br from-blue-500 via-blue-800 to-red-800', textColors: 'text-white', tier: 'HERO', 
-                stats: { pac: 90, sho: 60, pas: 95, dri: 80, def: 116, phy: 112 },
-                celebration: 'Vỗ tay đanh thép xốc lại tinh thần toàn đội', record: 'Trung vệ đội trưởng dũng cảm, chỉ huy hàng thủ vững chắc.',
-                image: ''
-            },
-            { 
-                id: 'p17', name: 'Antoine Semenyo', ovr: 112, pos: 'RW', nation: '🇬🇭', club: 'BOU', 
-                rarity: 'bg-gradient-to-br from-red-600 via-neutral-800 to-black', textColors: 'text-white', tier: 'BASE', 
-                stats: { pac: 110, sho: 105, pas: 92, dri: 108, def: 50, phy: 95 },
-                celebration: 'Trượt cỏ ăn mừng đầy phấn khích', record: 'Tiền đạo chạy cánh với nền tảng thể lực và sức càn lướt ấn tượng.',
-                image: ''
-            },
-            { 
-                id: 'p18', name: 'Đỗ Hoàng Hên', ovr: 111, pos: 'CM', nation: '🇻🇳', club: 'ĐTVN', 
-                rarity: 'bg-gradient-to-br from-slate-300 via-gray-500 to-zinc-700', textColors: 'text-slate-900', tier: 'SILVER', 
-                stats: { pac: 95, sho: 85, pas: 108, dri: 98, def: 100, phy: 90 },
-                celebration: 'Giơ tay chào khán giả thân thiện', record: 'Cầu thủ bền bỉ cống hiến thầm lặng ở khu vực giữa sân.',
-                image: ''
-            },
+                id: 'yamal', 
+                name: 'Lamine Yamal', 
+                season: 'Wonderkid 2024-2026', 
+                pos: 'RW', 
+                nation: '🇪🇸 Tây Ban Nha', 
+                club: 'FC Barcelona', 
+                image: './assets/yamal.png', // Đổi đường dẫn ảnh thẻ thật của bạn ở đây
+                funFact: 'Cầu thủ trẻ nhất lịch sử vô địch EURO và ghi bàn tại VCK EURO khi mới 16 tuổi 338 ngày.',
+                celebration: 'Tạo hình số 304 bằng các ngón tay (Mã vùng quê nhà Rocafonda)' 
+            }
+            // MẪU COPY:
+            // ,{ 
+            //     id: 'id_cau_thu', 
+            //     name: 'Tên cầu thủ', 
+            //     season: 'Mùa giải', 
+            //     pos: 'Vị trí', 
+            //     nation: 'Quốc gia', 
+            //     club: 'Câu lạc bộ', 
+            //     image: './assets/ten_anh.png', 
+            //     funFact: 'Sự thật thú vị về cầu thủ.',
+            //     celebration: 'Kiểu ăn mừng' 
+            // }
         ];
 
         const CHEER_MESSAGES = [
@@ -244,67 +155,50 @@
             }
         };
 
+        // GIAO DIỆN BỘ THẺ PNG MỚI
         const PlayerCard = ({ player, isNew = false, delay = 0 }) => {
-            // Biến trạng thái để kiểm tra nếu ảnh tải bị lỗi (nhập sai tên file chẳng hạn)
             const [imgError, setImgError] = useState(false);
-            
             if (!player) return null;
-            const statLabels = player.isGk ? ['ĐỔ BÓNG', 'BẮT BÓNG', 'PHÁ BÓNG', 'PHẢN XẠ', 'TỐC ĐỘ', 'CHỌN VỊ TRÍ'] : ['TỐC ĐỘ', 'SÚT BÓNG', 'CHUYỀN', 'RÊ BÓNG', 'PHÒNG THỦ', 'THỂ LỰC'];
-            const statValues = [player.stats.pac, player.stats.sho, player.stats.pas, player.stats.dri, player.stats.def, player.stats.phy];
 
             return (
                 <div 
-                    className={`group relative w-[220px] h-[340px] select-none transition-transform duration-300 hover:scale-105 hover:-translate-y-2 ${isNew ? 'animate-card-reveal' : 'animate-fade-in'}`}
+                    className={`flex flex-col items-center select-none w-[256px] transition-all duration-300 ${isNew ? 'animate-card-reveal' : 'animate-fade-in'}`}
                     style={{ animationDelay: `${delay}ms` }}
                 >
-                    <div 
-                        className={`absolute inset-0 ${player.rarity} shadow-2xl overflow-hidden`}
-                        style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%, 0% 10%)', border: '2px solid rgba(255,255,255,0.2)' }}
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white to-transparent opacity-0 group-hover:opacity-40 group-hover:animate-sweep transform -skew-x-12 z-50 pointer-events-none"></div>
-                        <div className={`relative h-full flex flex-col p-3 ${player.textColors}`}>
-                            
-                            <div className="flex justify-between items-start z-20">
-                                <div className="flex flex-col items-center ml-1 mt-1">
-                                    <span className="text-4xl font-black italic tracking-tighter drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] leading-none">{player.ovr}</span>
-                                    <span className="text-sm font-extrabold opacity-90 tracking-wide drop-shadow-md">{player.pos}</span>
-                                    <div className="mt-1 w-8 h-6 flex items-center justify-center text-2xl filter drop-shadow-md border border-white/20 bg-black/20">{player.nation}</div>
-                                </div>
-                                <div className="flex flex-col items-end gap-1 mr-1 mt-2">
-                                    <span className="text-[10px] font-black bg-black/40 px-1.5 py-0.5 rounded shadow-lg border border-white/20 uppercase">{player.tier}</span>
-                                    <span className="text-xs font-bold opacity-80">{player.club}</span>
-                                </div>
+                    {/* KHUNG HIỂN THỊ ẢNH PNG HOÀN CHỈNH */}
+                    <div className="w-[256px] h-[256px] relative rounded-2xl shadow-[0_10px_30px_rgba(6,182,212,0.2)] overflow-hidden flex items-center justify-center bg-slate-800 border-2 border-slate-700 transform transition-transform duration-300 hover:scale-[1.03]">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity pointer-events-none z-10"></div>
+                        {!imgError && player.image ? (
+                            <img 
+                                src={player.image} 
+                                alt={player.name}
+                                className="w-full h-full object-cover" 
+                                onError={() => setImgError(true)}
+                            />
+                        ) : (
+                            <div className="flex flex-col items-center justify-center text-center p-4">
+                                <Users size={48} className="text-cyan-400 mb-2" />
+                                <span className="text-sm font-bold text-slate-300">Lỗi Tải Ảnh</span>
+                                <span className="text-[10px] text-slate-400 break-all mt-1 bg-black/50 p-1 rounded">{player.image || 'Chưa có link ảnh'}</span>
                             </div>
-                            
-                            {/* LOGIC HIỂN THỊ ẢNH PNG HOẶC SVG MẶC ĐỊNH */}
-                            <div className="absolute top-[40px] left-1/2 transform -translate-x-1/2 w-[160px] h-[150px] z-10 flex flex-col items-center justify-end drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-                                {player.image && !imgError ? (
-                                    <img 
-                                        src={player.image} 
-                                        alt={player.name} 
-                                        className="w-[120%] max-h-full object-contain object-bottom pointer-events-none drop-shadow-2xl" 
-                                        onError={() => setImgError(true)} 
-                                    />
-                                ) : (
-                                    <svg viewBox="0 0 100 100" fill="currentColor" className="w-[120px] h-[120px] text-white/90 opacity-90">
-                                        <path d="M50 10 C35 10, 25 25, 28 40 C30 50, 40 55, 50 55 C60 55, 70 50, 72 40 C75 25, 65 10, 50 10 Z" />
-                                        <path d="M20 90 C20 70, 30 60, 50 60 C70 60, 80 70, 80 90 L80 100 L20 100 Z" />
-                                    </svg>
-                                )}
-                            </div>
+                        )}
+                    </div>
 
-                            <div className="mt-auto mb-1 z-20 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-6 pb-2 px-1 -mx-3 rounded-b-lg">
-                                <h3 className="text-center font-black text-lg uppercase tracking-wider drop-shadow-lg mb-2">{player.name}</h3>
-                                <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 px-2 text-[10px] font-bold">
-                                    {statLabels.map((label, idx) => (
-                                        <div key={idx} className="flex justify-between items-center border-b border-white/10 pb-[1px]">
-                                            <span className="opacity-80 text-[9px]">{label}</span>
-                                            <span className="text-[12px]">{statValues[idx]}</span>
-                                        </div>
-                                    ))}
-                                </div>
+                    {/* THÔNG TIN BỔ SUNG PHÍA DƯỚI THẺ */}
+                    <div className="w-full mt-4 bg-slate-900/90 border border-slate-700 rounded-xl p-3.5 shadow-lg flex flex-col gap-3 text-left transform transition-transform duration-300 hover:scale-[1.01]">
+                        <div className="flex items-start gap-2.5 text-xs">
+                            <Sparkles size={16} className="text-cyan-400 shrink-0 mt-0.5" />
+                            <div>
+                                <span className="font-black text-cyan-400 block mb-1 uppercase tracking-wide">Thông tin:</span>
+                                <p className="text-slate-300 text-[11px] leading-relaxed">{player.funFact}</p>
                             </div>
-
+                        </div>
+                        <div className="flex items-start gap-2.5 text-xs border-t border-slate-800 pt-2.5">
+                            <Trophy size={16} className="text-amber-400 shrink-0 mt-0.5" />
+                            <div>
+                                <span className="font-black text-amber-400 block mb-1 uppercase tracking-wide">Kiểu ăn mừng:</span>
+                                <p className="text-amber-200/90 text-[11px] leading-relaxed italic">"{player.celebration}"</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -315,6 +209,7 @@
             const [screen, setScreen] = useState('home'); 
             const [unlockedCards, setUnlockedCards] = useState([]);
             const [soundEnabled, setSoundEnabled] = useState(true);
+            const [wakeLockActive, setWakeLockActive] = useState(false);
             
             const [questionBank, setQuestionBank] = useState(() => {
                 try {
@@ -343,23 +238,57 @@
             const [devTab, setDevTab] = useState('questions');
             const [newQ, setNewQ] = useState({ text: '', opt0: '', opt1: '', opt2: '', opt3: '', correct: 0 });
 
+            // TÍNH NĂNG GIỮ SÁNG MÀN HÌNH (WAKE LOCK)
+            useEffect(() => {
+                let wakeLock = null;
+                const requestWakeLock = async () => {
+                    try {
+                        if ('wakeLock' in navigator) {
+                            wakeLock = await navigator.wakeLock.request('screen');
+                            setWakeLockActive(true);
+                            wakeLock.addEventListener('release', () => {
+                                setWakeLockActive(false);
+                            });
+                        }
+                    } catch (err) {
+                        console.log('Wake Lock Error:', err);
+                        setWakeLockActive(false);
+                    }
+                };
+
+                requestWakeLock();
+
+                const handleVisibilityChange = () => {
+                    if (wakeLock !== null && document.visibilityState === 'visible') {
+                        requestWakeLock(); // Cố gắng xin lại quyền giữ sáng khi quay lại
+                    }
+                };
+
+                document.addEventListener('visibilitychange', handleVisibilityChange);
+                return () => {
+                    if (wakeLock) wakeLock.release();
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
+                };
+            }, []);
+
             useEffect(() => {
                 try {
-                    const saved = localStorage.getItem('fc_algebra_pro_cards_v2');
+                    const saved = localStorage.getItem('fc_algebra_pro_cards_v3');
                     if (saved) setUnlockedCards(JSON.parse(saved));
                 } catch (e) { console.error(e); }
             }, []);
 
             useEffect(() => {
-                localStorage.setItem('fc_algebra_pro_cards_v2', JSON.stringify(unlockedCards));
+                localStorage.setItem('fc_algebra_pro_cards_v3', JSON.stringify(unlockedCards));
             }, [unlockedCards]);
 
             useEffect(() => {
                 localStorage.setItem('fc_algebra_questions_v2', JSON.stringify(questionBank));
             }, [questionBank]);
 
+            // CƠ CHẾ VAR PHÁT HIỆN GIAN LẬN
             useEffect(() => {
-                const handleVisibilityChange = () => {
+                const handleVisibility = () => {
                     if (document.hidden && screen === 'quiz' && !isRedCarded) {
                         setCheatCount(prev => {
                             const newCount = prev + 1;
@@ -379,8 +308,8 @@
                         });
                     }
                 };
-                document.addEventListener('visibilitychange', handleVisibilityChange);
-                return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+                document.addEventListener('visibilitychange', handleVisibility);
+                return () => document.removeEventListener('visibilitychange', handleVisibility);
             }, [screen, isRedCarded]);
 
             const soundPlay = (type) => {
@@ -450,7 +379,7 @@
                     isDup = true;
                 }
                 setAwardedPlayerTemp({ ...chosen, duplicate: isDup });
-                setRevealStep(1);
+                setRevealStep(1); // Màn hình result dùng từ step 1->4
             };
 
             const handleNextRevealStep = () => {
@@ -505,10 +434,12 @@
             return (
                 <div className="flex flex-col relative w-full min-h-screen">
                     <style>{`
-                        @keyframes sweep { 0% { transform: translateX(-150%) skewX(-12deg); } 100% { transform: translateX(150%) skewX(-12deg); } }
-                        .animate-sweep { animation: sweep 1.5s infinite; }
-                        @keyframes cardReveal { 0% { transform: scale(0.2) translateY(-300px) rotate(-15deg) rotateY(180deg); opacity: 0; filter: brightness(3); } 50% { transform: scale(1.2) translateY(50px) rotate(5deg) rotateY(90deg); filter: brightness(1.5); } 100% { transform: scale(1) translateY(0) rotate(0) rotateY(0); opacity: 1; filter: brightness(1); } }
-                        .animate-card-reveal { animation: cardReveal 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+                        @keyframes cardReveal { 
+                            0% { transform: scale(0.2) translateY(-100px) rotateY(180deg); opacity: 0; filter: brightness(3) contrast(1.5); } 
+                            50% { transform: scale(1.1) rotateY(90deg); filter: brightness(1.5); } 
+                            100% { transform: scale(1) rotateY(0deg); opacity: 1; filter: brightness(1); } 
+                        }
+                        .animate-card-reveal { animation: cardReveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
                         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
                         .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
                         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
@@ -533,6 +464,12 @@
                             </h1>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-4">
+                            {/* Nút báo hiệu Màn hình sáng */}
+                            <div className={`hidden sm:flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border transition-colors ${wakeLockActive ? 'bg-amber-950/40 border-amber-500/50 text-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.2)]' : 'bg-slate-800 border-slate-700 text-slate-400'}`}>
+                                <Sun size={14} className={wakeLockActive ? 'animate-spin-slow' : ''} />
+                                {wakeLockActive ? 'MÀN HÌNH SÁNG' : 'CHẾ ĐỘ THƯỜNG'}
+                            </div>
+
                             {screen !== 'quiz' && (
                                 <button onClick={() => setScreen('dev_login')} className="text-slate-600 hover:text-cyan-400 transition" title="Nhà phát triển">
                                     <Settings size={20} />
@@ -570,7 +507,6 @@
                     )}
 
                     <main className="flex-1 flex flex-col max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8 relative z-10">
-                        {/* Màn hình chính */}
                         {screen === 'home' && (
                             <div className="flex-1 flex flex-col items-center justify-center text-center space-y-10 animate-fade-in py-12">
                                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950 -z-10 pointer-events-none"></div>
@@ -580,8 +516,8 @@
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-500">ĐẠI SỐ</span>
                                     </h2>
                                     <p className="text-slate-400 max-w-lg mx-auto text-lg font-medium">
-                                        Vượt qua 10 câu Đại số lớp 8. Đạt <span className="text-green-400 font-bold">80%</span> để mở khóa các siêu sao thế giới và ĐTVN! <br/>
-                                        <span className="text-red-400 text-sm italic">⚠️ Chế độ Fair-play: Không có nút thoát giữa trận & VAR kiểm tra gian lận!</span>
+                                        Vượt qua 10 câu Đại số. Đạt <span className="text-green-400 font-bold">80%</span> để mở khóa bộ sưu tập thẻ siêu sao thế giới! <br/>
+                                        <span className="text-red-400 text-sm italic">⚠️ Chế độ Fair-play: Không thoát khỏi trình duyệt lúc thi đấu!</span>
                                     </p>
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-6 w-full max-w-lg mt-8">
@@ -595,7 +531,6 @@
                             </div>
                         )}
 
-                        {/* Màn hình làm bài thi */}
                         {screen === 'quiz' && dailyQuiz.length > 0 && !isRedCarded && (
                             <div className="flex-1 flex flex-col max-w-3xl w-full mx-auto animate-fade-in">
                                 <div className="flex items-center gap-4 mb-10">
@@ -667,7 +602,6 @@
                             </div>
                         )}
 
-                        {/* Màn hình tổng kết và nhận quà */}
                         {screen === 'result' && (
                             <div className="flex-1 flex flex-col items-center justify-center text-center w-full relative py-8">
                                 {score >= 8 && !isRedCarded && (
@@ -686,10 +620,11 @@
                                 {isRedCarded ? (
                                     <div className="bg-red-950/80 border-2 border-red-500 text-red-200 font-bold p-6 rounded-2xl max-w-md animate-fade-in flex flex-col items-center">
                                         <Shield size={48} className="text-red-500 mb-4" />
-                                        Cậu đã nhận thẻ đỏ vì thoát ứng dụng giữa trận. Kết quả bị hủy. 
+                                        Cậu đã nhận thẻ đỏ vì thoát trình duyệt giữa trận. Kết quả bị hủy. 
                                     </div>
                                 ) : score >= 8 ? (
                                     <div className="flex flex-col items-center w-full max-w-lg">
+                                        {/* CẬP NHẬT LOGIC LẬT GỢI Ý CỦA THẺ PNG MỚI */}
                                         {revealStep < 5 && awardedPlayerTemp && (
                                             <div className="bg-slate-900 border-2 border-cyan-500/50 p-6 rounded-3xl shadow-[0_0_30px_rgba(6,182,212,0.3)] w-full animate-fade-in my-4">
                                                 <div className="flex items-center justify-center gap-2 text-cyan-400 font-bold text-sm uppercase mb-4">
@@ -698,16 +633,16 @@
 
                                                 <div className="space-y-3 mb-6 min-h-[140px] flex flex-col justify-center">
                                                     <div className={`p-3 rounded-xl border transition-all ${revealStep >= 1 ? 'bg-slate-950 border-cyan-500/60 text-white font-bold' : 'bg-slate-950/40 border-slate-800 text-slate-600'}`}>
-                                                        {revealStep >= 1 ? `✨ Mùa thẻ / Tier: ${awardedPlayerTemp.tier}` : '❓ Đang ẩn Mùa thẻ...'}
+                                                        {revealStep >= 1 ? `✨ Mùa thẻ: ${awardedPlayerTemp.season}` : '❓ Đang ẩn Mùa thẻ...'}
                                                     </div>
                                                     <div className={`p-3 rounded-xl border transition-all ${revealStep >= 2 ? 'bg-slate-950 border-cyan-500/60 text-white font-bold' : 'bg-slate-950/40 border-slate-800 text-slate-600'}`}>
                                                         {revealStep >= 2 ? `🛡️ Vị trí thi đấu: ${awardedPlayerTemp.pos}` : '❓ Đang ẩn Vị trí...'}
                                                     </div>
                                                     <div className={`p-3 rounded-xl border transition-all ${revealStep >= 3 ? 'bg-slate-950 border-cyan-500/60 text-white font-bold' : 'bg-slate-950/40 border-slate-800 text-slate-600'}`}>
-                                                        {revealStep >= 3 ? `🌍 Quốc gia: ${awardedPlayerTemp.nation} (${awardedPlayerTemp.club})` : '❓ Đang ẩn Quốc gia & CLB...'}
+                                                        {revealStep >= 3 ? `🌍 Quốc gia & CLB: ${awardedPlayerTemp.nation} - ${awardedPlayerTemp.club}` : '❓ Đang ẩn Quốc gia & CLB...'}
                                                     </div>
                                                     <div className={`p-3 rounded-xl border transition-all ${revealStep >= 4 ? 'bg-slate-950 border-yellow-500/60 text-yellow-300 font-bold text-sm' : 'bg-slate-950/40 border-slate-800 text-slate-600'}`}>
-                                                        {revealStep >= 4 ? `🎉 Gợi ý kỷ lục: "${awardedPlayerTemp.record}"` : '❓ Đang ẩn Kỷ lục đặc biệt...'}
+                                                        {revealStep >= 4 ? `🎉 Gợi ý đặc biệt: "${awardedPlayerTemp.funFact}"` : '❓ Đang ẩn Thông tin đặc biệt...'}
                                                     </div>
                                                 </div>
 
@@ -731,15 +666,12 @@
                                                         (Thẻ đã có trong Đội hình)
                                                     </div>
                                                 )}
-                                                <div className="mt-4 text-xs text-slate-400 max-w-xs text-center">
-                                                    <span className="text-cyan-400 font-bold">Kiểu ăn mừng:</span> {newCardWon.celebration}
-                                                </div>
                                             </div>
                                         )}
                                     </div>
                                 ) : (
                                     <div className="bg-slate-900 border border-slate-700 text-slate-300 font-bold p-6 rounded-2xl max-w-md animate-fade-in my-6">
-                                        Cần đạt ít nhất 8/10 (80%) để nhận thẻ cầu thủ. <br/> Đừng nản chí, làm lại trận mới nào!
+                                        Cần đạt ít nhất 8/10 (80%) để nhận thẻ. <br/> Cố gắng tập trung hơn ở trận sau nhé!
                                     </div>
                                 )}
 
@@ -754,7 +686,6 @@
                             </div>
                         )}
 
-                        {/* Màn hình bộ sưu tập */}
                         {screen === 'collection' && (
                             <div className="flex-1 flex flex-col animate-fade-in pb-12">
                                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 border-b border-slate-800 pb-6">
@@ -774,7 +705,7 @@
                                         return (
                                             <div key={player.id} className="flex flex-col items-center">
                                                 {isUnlocked ? <PlayerCard player={player} delay={index * 50} /> : (
-                                                    <div className="w-[220px] h-[340px] bg-slate-900 rounded-lg border-2 border-slate-800 border-dashed flex flex-col items-center justify-center text-slate-700 p-4 shadow-inner" style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%, 0% 10%)' }}>
+                                                    <div className="w-[256px] h-[256px] bg-slate-900 rounded-2xl border-2 border-slate-800 border-dashed flex flex-col items-center justify-center text-slate-700 p-4 shadow-inner">
                                                         <Shield size={64} strokeWidth={1} className="opacity-20 mb-4" />
                                                         <span className="font-black text-lg opacity-40 uppercase tracking-widest">{player.pos}</span>
                                                         <span className="font-bold text-sm opacity-30 mt-2">LOCKED</span>
@@ -787,7 +718,6 @@
                             </div>
                         )}
 
-                        {/* Màn hình đăng nhập Dev */}
                         {screen === 'dev_login' && (
                             <div className="flex-1 flex flex-col items-center justify-center animate-fade-in py-12">
                                 <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl max-w-md w-full text-center">
@@ -811,7 +741,6 @@
                             </div>
                         )}
 
-                        {/* Màn hình Dashboard quản lý Dev */}
                         {screen === 'dev_dashboard' && isDevAuth && (
                             <div className="flex-1 flex flex-col animate-fade-in pb-12">
                                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 border-b border-slate-800 pb-6">
