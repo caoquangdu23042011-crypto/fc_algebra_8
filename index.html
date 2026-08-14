@@ -317,7 +317,19 @@
             };
 
             const startDailyQuiz = () => {
-                const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+                // Xáo trộn thứ tự các lựa chọn (A, B, C, D) và cập nhật lại vị trí đáp án đúng
+                const processedQuestions = questionBank.map(q => {
+                    const optionsWithIndex = q.options.map((opt, idx) => ({ opt, originalIndex: idx }));
+                    const shuffledOpts = [...optionsWithIndex].sort(() => 0.5 - Math.random());
+                    const newCorrect = shuffledOpts.findIndex(item => item.originalIndex === q.correct);
+                    return {
+                        ...q,
+                        options: shuffledOpts.map(item => item.opt),
+                        correct: newCorrect
+                    };
+                });
+                
+                const shuffled = [...processedQuestions].sort(() => 0.5 - Math.random());
                 setDailyQuiz(shuffled.slice(0, 10));
                 setCurrentIndex(0);
                 setScore(0);
