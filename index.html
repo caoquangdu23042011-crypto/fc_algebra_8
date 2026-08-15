@@ -462,7 +462,7 @@
             
             const [questionBank, setQuestionBank] = useState(() => {
                 try {
-                    const saved = localStorage.getItem('fc_algebra_questions_v2');
+                    const saved = localStorage.getItem('fc_algebra_questions_v3');
                     return saved ? JSON.parse(saved) : DEFAULT_QUESTIONS;
                 } catch (e) { return DEFAULT_QUESTIONS; }
             });
@@ -532,7 +532,7 @@
             }, [unlockedCards]);
 
             useEffect(() => {
-                localStorage.setItem('fc_algebra_questions_v2', JSON.stringify(questionBank));
+                localStorage.setItem('fc_algebra_questions_v3', JSON.stringify(questionBank));
             }, [questionBank]);
 
             // CƠ CHẾ VAR PHÁT HIỆN GIAN LẬN
