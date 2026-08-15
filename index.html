@@ -1093,7 +1093,7 @@
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
-                                    {PLAYERS.map((player, index) => {
+                                    {[...PLAYERS].sort((a, b) => unlockedCards.includes(b.id) - unlockedCards.includes(a.id)).map((player, index) => {
                                         const isUnlocked = unlockedCards.includes(player.id);
                                         return (
                                             <div key={player.id} className="flex flex-col items-center">
