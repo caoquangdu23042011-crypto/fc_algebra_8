@@ -592,9 +592,20 @@
             const [soundEnabled, setSoundEnabled] = useState(true);
             // Biến quản lý riêng cho nhạc lúc làm bài
             const [focusMusicEnabled, setFocusMusicEnabled] = useState(true);
-                        // KHAI BÁO NHẠC NỀN (BGM)
-            // Lưu ý: Đổi đường dẫn './...' thành './assets/...' nếu cậu để nhạc trong thư mục assets
-            const bgmHome = useRef(typeof Audio !== "undefined" ? new Audio('./assets/background.mp3') : null);
+            const bgmHome = useRef(
+                typeof Audio !== "undefined"
+                    ? new Audio('./assets/background.mp3')
+                    : null
+            );
+
+            const homeMusicTracks = [
+                './assets/background.mp3',
+                './assets/background1.mp3',
+                './assets/background2.mp3',
+                './assets/background3.mp3'
+            ];
+
+            const [homeMusicIndex, setHomeMusicIndex] = useState(0);
             const bgmQuiz = useRef(typeof Audio !== "undefined" ? new Audio('./assets/focus_song.mp3') : null);
             const bgmGacha = useRef(typeof Audio !== "undefined" ? new Audio('./assets/open_ghacha.m4a') : null);
             const bgmPack = useRef(typeof Audio !== "undefined" ? new Audio('./assets/open_pack.m4a') : null);
@@ -751,8 +762,19 @@
             // 5. CẬP NHẬT QUAN TRỌNG: Phải thêm focusMusicEnabled vào đây để nó theo dõi nút bấm
             }, [screen, revealStep, soundEnabled, focusMusicEnabled]);
 
-            const soundPlay = (type) => {
-                if (soundEnabled) playSound(type);
+            const changeHomeMusic = () => {
+                const nextIndex = (homeMusicIndex + 1) % homeMusicTracks.length;
+                setHomeMusicIndex(nextIndex);
+
+                if (bgmHome.current) {
+                    bgmHome.current.pause();
+                    bgmHome.current.currentTime = 0;
+                    bgmHome.current.src = homeMusicTracks[nextIndex];
+
+                    if (soundEnabled) {
+                        bgmHome.current.play().catch(() => {});
+                    }
+                }
             };
 
             const startDailyQuiz = () => {
@@ -924,6 +946,14 @@
                             {screen !== 'quiz' && (
                                 <button onClick={() => setScreen('dev_login')} className="text-slate-600 hover:text-cyan-400 transition" title="Nhà phát triển">
                                     <Settings size={20} />
+                                </button>
+                            )}
+                            {screen === 'home' && (
+                                <button
+                                    onClick={changeHomeMusic}
+                                    className="text-purple-400 hover:text-white transition"
+                                >
+                                    <Volume2 size={24} />
                                 </button>
                             )}
 
