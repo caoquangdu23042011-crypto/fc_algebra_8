@@ -27,7 +27,7 @@
     <div id="root"></div>
 
     <script type="text/babel" data-type="module">
-        import React, { useState, useEffect } from 'react';
+        import React, { useState, useEffect, useRef } from 'react';
         import { createRoot } from 'react-dom/client';
         // Đã bổ sung các icon cần thiết cho bộ thẻ mới và Wake Lock (Sun, Sparkles, Users...)
         import { Trophy, Play, Home, CheckCircle, XCircle, ArrowRight, Volume2, VolumeX, Shield, Swords, Zap, Settings, Lock, PlusCircle, Save, Database, Users, HelpCircle, Sun, Sparkles } from 'lucide-react';
@@ -590,6 +590,14 @@
             const [screen, setScreen] = useState('home'); 
             const [unlockedCards, setUnlockedCards] = useState([]);
             const [soundEnabled, setSoundEnabled] = useState(true);
+            // Biến quản lý riêng cho nhạc lúc làm bài
+            const [focusMusicEnabled, setFocusMusicEnabled] = useState(true);
+                        // KHAI BÁO NHẠC NỀN (BGM)
+            // Lưu ý: Đổi đường dẫn './...' thành './assets/...' nếu cậu để nhạc trong thư mục assets
+            const bgmHome = useRef(typeof Audio !== "undefined" ? new Audio('./assets/background.mp3') : null);
+            const bgmQuiz = useRef(typeof Audio !== "undefined" ? new Audio('./assets/focus_song.mp3') : null);
+            const bgmGacha = useRef(typeof Audio !== "undefined" ? new Audio('./assets/open_ghacha.m4a') : null);
+            const bgmPack = useRef(typeof Audio !== "undefined" ? new Audio('./assets/open_pack.m4a') : null);
             const [wakeLockActive, setWakeLockActive] = useState(false);
             
             const [questionBank, setQuestionBank] = useState(() => {
@@ -692,6 +700,56 @@
                 document.addEventListener('visibilitychange', handleVisibility);
                 return () => document.removeEventListener('visibilitychange', handleVisibility);
             }, [screen, isRedCarded]);
+
+            // BỘ ĐIỀU KHIỂN NHẠC NỀN TỰ ĐỘNG THEO MÀN HÌNH VÀ TIẾN TRÌNH
+            useEffect(() => {
+                // 1. Cài đặt nhạc lặp lại (loop).
+                if (bgmHome.current) bgmHome.current.loop = true;
+                if (bgmQuiz.current) bgmQuiz.current.loop = true;
+                if (bgmGacha.current) bgmGacha.current.loop = true;
+
+                // 2. Dừng ngay toàn bộ nhạc cũ trước khi chuyển sang cảnh mới
+                bgmHome.current?.pause();
+                bgmQuiz.current?.pause();
+                bgmGacha.current?.pause();
+                bgmPack.current?.pause();
+
+                // 3. Hàm phát nhạc an toàn
+                const playMusic = async (audioRef, resetTime = false) => {
+                    if (audioRef.current) {
+                        try {
+                            if (resetTime) audioRef.current.currentTime = 0; // Tua lại đầu bài
+                            await audioRef.current.play();
+                        } catch (e) {
+                            console.log("Trình duyệt đợi click chuột lần đầu để phát nhạc");
+                        }
+                    }
+                };
+
+                // 4. Kịch bản phát nhạc
+                if (screen === 'home' || screen === 'collection') { 
+                    // Phát nhạc sảnh nếu loa tổng đang bật
+                    if (soundEnabled) playMusic(bgmHome, false); 
+                } 
+                else if (screen === 'quiz') {
+                    if (bgmQuiz.current) bgmQuiz.current.volume = 0.5; 
+                    // CHỈ PHÁT NHẠC KHI: Loa tổng bật VÀ Nút nhạc focus cũng đang bật
+                    if (soundEnabled && focusMusicEnabled) {
+                        playMusic(bgmQuiz, false); // Để false để lúc bật lại không bị tua về đầu
+                    }
+                } 
+                else if (screen === 'result') {
+                    if (soundEnabled) {
+                        if (revealStep > 0 && revealStep < 5) {
+                            playMusic(bgmGacha, false); 
+                        } else if (revealStep === 5) {
+                            playMusic(bgmPack, true);
+                        }
+                    }
+                }
+
+            // 5. CẬP NHẬT QUAN TRỌNG: Phải thêm focusMusicEnabled vào đây để nó theo dõi nút bấm
+            }, [screen, revealStep, soundEnabled, focusMusicEnabled]);
 
             const soundPlay = (type) => {
                 if (soundEnabled) playSound(type);
@@ -868,9 +926,14 @@
                                     <Settings size={20} />
                                 </button>
                             )}
-                            <button onClick={() => setSoundEnabled(!soundEnabled)} className="text-cyan-400 hover:text-white transition">
-                                {soundEnabled ? <Volume2 size={24} /> : <VolumeX size={24} />}
-                            </button>
+
+                            {/* Đã bọc thêm điều kiện screen === 'quiz' vào nút loa */}
+                            {screen === 'quiz' && (
+                                <button onClick={() => setSoundEnabled(!soundEnabled)} className="text-cyan-400 hover:text-white transition">
+                                    {soundEnabled ? <Volume2 size={24} /> : <VolumeX size={24} />}
+                                </button>
+                            )}
+
                             {screen !== 'quiz' && (
                                 <div className="flex items-center gap-2 bg-slate-950 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-slate-800 shadow-inner cursor-pointer hover:bg-slate-800" onClick={() => setScreen('collection')}>
                                     <Trophy size={18} className="text-yellow-400" />
