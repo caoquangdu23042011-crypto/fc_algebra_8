@@ -33,76 +33,84 @@
         import { Trophy, Play, Home, CheckCircle, XCircle, ArrowRight, Volume2, VolumeX, Shield, Swords, Zap, Settings, Lock, PlusCircle, Save, Database, Users, HelpCircle, Sun, Sparkles } from 'lucide-react';
 
         const DEFAULT_QUESTIONS = [
-            { id: 1, text: 'Khai triển hằng đẳng thức: (x + y)²', options: ['x² + 2xy + y²', 'x² + xy + y²', 'x² - 2xy + y²', 'x² + y²'], correct: 0 },
-            { id: 2, text: 'Khai triển: (x - 3)²', options: ['x² - 3x + 9', 'x² - 6x + 9', 'x² + 6x + 9', 'x² - 9'], correct: 1 },
-            { id: 3, text: 'Viết biểu thức sau dưới dạng tích: x² - 16', options: ['(x-4)(x-4)', '(x-8)(x+8)', '(x-4)(x+4)', '(x-16)(x+1)'], correct: 2 },
-            { id: 4, text: 'Tính nhanh giá trị: 101² - 99²', options: ['200', '400', '100', '404'], correct: 1 }, 
-            { id: 5, text: 'Khai triển lập phương tổng: (x + 1)³', options: ['x³ + 3x² + 3x + 1', 'x³ + 1', 'x³ + x² + x + 1', 'x³ + 3x + 1'], correct: 0 },
-            { id: 6, text: 'Rút gọn biểu thức: (x + y)² - (x - y)²', options: ['2x² + 2y²', '4xy', '0', '2xy'], correct: 1 },
-            { id: 7, text: 'Phân tích đa thức thành nhân tử: x³ - 8', options: ['(x-2)(x²-2x+4)', '(x-2)(x²+4x+4)', '(x-2)(x²+2x+4)', '(x-2)³'], correct: 2 },
-            { id: 8, text: 'Giá trị của biểu thức x² - 2x + 1 tại x = 11 là bao nhiêu?', options: ['100', '121', '144', '111'], correct: 0 }, 
-            { id: 9, text: 'Biểu thức 4x² + 12x + 9 viết gọn thành:', options: ['(2x + 9)²', '(4x + 3)²', '(2x + 3)²', '(2x - 3)²'], correct: 2 },
-            { id: 10, text: 'Khai triển lập phương hiệu: (a - b)³', options: ['a³ - 3a²b + 3ab² - b³', 'a³ - b³', 'a³ + 3a²b - 3ab² - b³', 'a³ - 3ab + b³'], correct: 0 },
-            { id: 11, text: 'Viết tổng thành tích: 8x³ + 27', options: ['(2x+3)(4x²-6x+9)', '(2x+3)(4x²+6x+9)', '(2x-3)(4x²-6x+9)', '(8x+27)³'], correct: 0 },
-            { id: 12, text: 'Rút gọn biểu thức: x(x - 2) - x²', options: ['-2x', '2x', '-2', 'x² - 2x'], correct: 0 },
-            { id: 13, text: 'Tính nhanh: 65² - 35²', options: ['1000', '2000', '3000', '900'], correct: 2 }, 
-            { id: 14, text: 'Đa thức x² - 10x + 25 là khai triển của:', options: ['(x - 5)²', '(x + 5)²', 'x² - 5²', '(x - 25)²'], correct: 0 },
-            { id: 15, text: 'Phân tích thành nhân tử: 3x² - 3y²', options: ['3(x-y)²', '3(x-y)(x+y)', '(3x-3y)(x+y)', '3x(x-y)'], correct: 1 },
-            { id: 16, text: 'Tìm x biết: x² - 9 = 0', options: ['x = 3 hoặc x = -3', 'x = 9', 'x = -3', 'x = 3'], correct: 0 },
-            { id: 17, text: 'Khai triển biểu thức: (2x + 1)²', options: ['4x² + 4x + 1', '2x² + 4x + 1', '4x² + 2x + 1', '4x² + 1'], correct: 0 },
-            { id: 18, text: 'Thu gọn đa thức: (x - 2)(x + 2) - x(x - 1)', options: ['x - 4', '-2x - 4', 'x + 4', '2x - 4'], correct: 0 },
-            { id: 19, text: 'Khai triển biểu thức: (3x + y)²', options: ['3x² + 6xy + y²', '9x² + 3xy + y²', '9x² + 6xy + y²', '9x² + y²'], correct: 2 },
-            { id: 20, text: 'Khai triển: (x - 2y)²', options: ['x² - 4xy + 4y²', 'x² - 2xy + 4y²', 'x² - 4xy + 2y²', 'x² + 4xy + 4y²'], correct: 0 },
-            { id: 21, text: 'Viết biểu thức sau dưới dạng đa thức: (2x - 5)(2x + 5)', options: ['2x² - 25', '4x² - 25', '4x² - 5', '2x² - 5'], correct: 1 },
-            { id: 22, text: 'Tính nhanh giá trị: 51²', options: ['2501', '2511', '2611', '2601'], correct: 3 },
-            { id: 23, text: 'Tính nhanh giá trị: 99²', options: ['9901', '9801', '9891', '9991'], correct: 1 },
-            { id: 24, text: 'Khai triển lập phương tổng: (2x + 1)³', options: ['8x³ + 12x² + 6x + 1', '8x³ + 6x² + 6x + 1', '8x³ + 12x² + 3x + 1', '8x³ + 1'], correct: 0 },
-            { id: 25, text: 'Khai triển lập phương hiệu: (x - 2)³', options: ['x³ - 2x² + 4x - 8', 'x³ - 8', 'x³ + 6x² - 12x - 8', 'x³ - 6x² + 12x - 8'], correct: 3 },
-            { id: 26, text: 'Viết thành đa thức: (3x - 1)(9x² + 3x + 1)', options: ['27x³ + 1', '27x³ - 1', '9x³ - 1', '3x³ - 1'], correct: 1 },
-            { id: 27, text: 'Viết biểu thức thành đa thức: (x + 4)(x² - 4x + 16)', options: ['x³ - 64', 'x³ + 16', 'x³ + 64', 'x³ - 16'], correct: 2 },
-            { id: 28, text: 'Rút gọn biểu thức: (x + 3)² - (x - 3)²', options: ['6x', '0', '12x', '2x² + 18'], correct: 2 },
-            { id: 29, text: 'Phân tích đa thức thành nhân tử: 5x² - 10x', options: ['5x(x - 2)', '5(x² - 2x)', 'x(5x - 10)', '5x(x - 10)'], correct: 0 },
-            { id: 30, text: 'Phân tích thành nhân tử: x² - 25y²', options: ['(x - 5y)²', '(x - 5y)(x + 5y)', '(x - 25y)(x + y)', '(x - y)(x + 25y)'], correct: 1 },
-            { id: 31, text: 'Phân tích đa thức thành nhân tử: x² + 6x + 9', options: ['(x + 3)²', '(x - 3)²', '(x + 9)²', 'x(x + 6) + 9'], correct: 0 },
-            { id: 32, text: 'Phân tích thành nhân tử: 4x² - 12x + 9', options: ['(4x - 3)²', '(2x + 3)²', '(4x + 3)²', '(2x - 3)²'], correct: 3 },
-            { id: 33, text: 'Viết đa thức sau thành tích: x³ + 27', options: ['(x+3)(x²+3x+9)', '(x-3)(x²+3x+9)', '(x+3)(x²-3x+9)', '(x+3)³'], correct: 2 },
-            { id: 34, text: 'Phân tích đa thức thành nhân tử: 8x³ - 1', options: ['(2x-1)(4x²+2x+1)', '(2x-1)(4x²-2x+1)', '(2x+1)(4x²-2x+1)', '(8x-1)(x²+x+1)'], correct: 0 },
-            { id: 35, text: 'Rút gọn biểu thức: (x + 2)³ - (x - 2)³', options: ['2x³ + 24x', '12x² + 16', '16', '12x²'], correct: 1 },
-            { id: 36, text: 'Phân tích đa thức thành nhân tử: x² - y² + 5x - 5y', options: ['(x-y)(x-y+5)', '(x+y)(x-y+5)', '(x-y)(x+y+5)', '(x-y)(x+y-5)'], correct: 2 },
-            { id: 37, text: 'Phân tích thành nhân tử: x² - 4x + 4 - y²', options: ['(x-2-y)(x-2+y)', '(x+2-y)(x+2+y)', '(x-y-2)(x+y-2)', '(x-4-y)(x-4+y)'], correct: 0 },
-            { id: 38, text: 'Tìm x biết: x² - 5x = 0', options: ['x = 5', 'x = 0 hoặc x = 5', 'x = 0 hoặc x = -5', 'x = -5'], correct: 1 },
-            { id: 39, text: 'Tìm x biết: (x - 3)² - 16 = 0', options: ['x = 7', 'x = 1 hoặc x = 7', 'x = -1', 'x = 7 hoặc x = -1'], correct: 3 },
-            { id: 40, text: 'Thực hiện phép chia đơn thức: 15x³y² : 3xy', options: ['5x²y', '5xy²', '12x²y', '5x²y²'], correct: 0 },
-            { id: 41, text: 'Thực hiện phép chia: (4x³ - 8x² + 4x) : 4x', options: ['x² - 2x', 'x² - 8x + 1', 'x² - 2x + 1', 'x² + 2x + 1'], correct: 2 },
-            { id: 42, text: 'Rút gọn phân thức: (x² - 9) : (x - 3)', options: ['x - 3', 'x + 3', 'x² + 3', 'x - 9'], correct: 1 },
-            { id: 43, text: 'Rút gọn biểu thức: (x - 1)(x² + x + 1) - x³', options: ['-1', '1', '-2x³', '0'], correct: 0 },
-            { id: 44, text: 'Tính giá trị biểu thức x² + 2x + 1 tại x = 99', options: ['9999', '9801', '1000', '10000'], correct: 3 },
-            { id: 45, text: 'Tính giá trị: x³ - 3x² + 3x - 1 tại x = 11', options: ['1331', '1000', '100', '121'], correct: 1 },
-            { id: 46, text: 'Biểu thức x² - x + 1/4 viết gọn thành:', options: ['(x + 1/2)²', '(x - 1/4)²', '(x - 1/2)²', '(x + 1/4)²'], correct: 2 },
-            { id: 47, text: 'Rút gọn biểu thức: (x + 5)(x - 5) - x²', options: ['-25', '25', 'x² - 25', '0'], correct: 0 },
-            { id: 48, text: 'Phân tích thành nhân tử: 16 - (x - 3)²', options: ['(x-7)(x+1)', '(7-x)(x+1)', '(x-1)(x+7)', '(1-x)(x+7)'], correct: 1 },
-            { id: 49, text: 'Viết gọn biểu thức: 25x² - 20xy + 4y²', options: ['(5x - 2y)²', '(5x + 2y)²', '(25x - 4y)²', '(5x - 4y)²'], correct: 0 },
-            { id: 50, text: 'Khai triển biểu thức: (x/2 + y)²', options: ['x²/4 + y²', 'x²/2 + xy + y²', 'x²/4 + 2xy + y²', 'x²/4 + xy + y²'], correct: 3 },
-            { id: 51, text: 'Tìm x biết: (x + 1)² - x² = 9', options: ['x = 8', 'x = 4', 'x = 5', 'x = 3'], correct: 1 },
-            { id: 52, text: 'Đa thức x³ - 6x² + 12x - 8 là khai triển của:', options: ['(x + 2)³', '(x - 8)³', '(x - 2)³', '(x - 4)³'], correct: 2 },
-            { id: 53, text: 'Đa thức 8x³ + 12x² + 6x + 1 là khai triển của:', options: ['(2x + 1)³', '(4x + 1)³', '(2x - 1)³', '(8x + 1)³'], correct: 0 },
-            { id: 54, text: 'Tính nhanh: 85² - 15²', options: ['10000', '7000', '6000', '8000'], correct: 1 },
-            { id: 55, text: 'Tính nhanh: 73² + 27² + 54.73', options: ['4600', '7300', '8100', '10000'], correct: 3 },
-            { id: 56, text: 'Rút gọn: (2x + 3)² - (2x - 3)²', options: ['8x²', '0', '24x', '18'], correct: 2 },
-            { id: 57, text: 'Phân tích thành nhân tử: x³ - x', options: ['x(x - 1)(x + 1)', 'x(x² + 1)', 'x²(x - 1)', '(x - 1)(x² + x + 1)'], correct: 0 },
-            { id: 58, text: 'Phân tích đa thức: x⁴ - 16', options: ['(x-2)(x+2)', '(x-2)(x+2)(x²+4)', '(x²-4)(x²-4)', '(x-4)(x+4)'], correct: 1 },
-            { id: 59, text: 'Tìm x biết: x(x - 4) - x² + 8 = 0', options: ['x = -2', 'x = 4', 'x = 2', 'x = -4'], correct: 2 },
-            { id: 60, text: 'Phân tích thành nhân tử: 3x² - 12', options: ['3(x - 2)(x + 2)', '3(x² - 4)', '(3x - 6)(x + 2)', '3x(x - 4)'], correct: 0 },
-            { id: 61, text: 'Phân tích thành nhân tử: 2x³ - 18x', options: ['2x(x - 9)', '2(x³ - 9x)', '2x(x - 3)²', '2x(x - 3)(x + 3)'], correct: 3 },
-            { id: 62, text: 'Thu gọn đa thức: 3x(x - 2) - 3x² + 5x', options: ['x', '-x', '-11x', '11x'], correct: 1 },
-            { id: 63, text: 'Thực hiện phép chia: (x³ + 8) : (x + 2)', options: ['x² - 2x + 4', 'x² + 2x + 4', 'x² - 4x + 4', 'x² - 4'], correct: 0 },
-            { id: 64, text: 'Rút gọn biểu thức: (a + b)³ - (a - b)³', options: ['2a³', '2b³', '6a²b + 2b³', '6ab²'], correct: 2 },
-            { id: 65, text: 'Giá trị nhỏ nhất của biểu thức: x² - 4x + 5', options: ['1', '2', '5', '0'], correct: 0 },
-            { id: 66, text: 'Tìm x biết: 4x² - 9 = 0', options: ['x = 3 hoặc x = -3', 'x = 3/2 hoặc x = -3/2', 'x = 9/4', 'x = 2/3 hoặc x = -2/3'], correct: 1 },
-            { id: 67, text: 'Tính giá trị biểu thức: (x - y)(x² + xy + y²) tại x = 4, y = 2', options: ['8', '16', '32', '56'], correct: 3 },
-            { id: 68, text: 'Thực hiện phép nhân: x(x² - 2x + 1)', options: ['x³ - 2x² + x', 'x³ - 2x + 1', 'x³ + 2x² + x', 'x³ - x'], correct: 0 }
+            // --- CHƯƠNG 1: ĐA THỨC NHIỀU BIẾN ---
+            { id: 1, text: 'Bậc của đa thức 3x²y³ - 4x⁴y + 5x²y là bao nhiêu?', options: ['5', '4', '6', '3'], correct: 0 },
+            { id: 2, text: 'Thu gọn đa thức 5x²y - 3xy² + 2x²y - xy² ta được kết quả:', options: ['7x²y - 2xy²', '7x²y - 4xy²', '3x²y - 4xy²', '7x⁴y² - 4x²y⁴'], correct: 1 },
+            { id: 3, text: 'Thực hiện phép tính: (2x + y) + (x - 3y)', options: ['3x - 2y', '3x + 4y', 'x - 2y', '3x - 4y'], correct: 0 },
+            { id: 4, text: 'Thực hiện phép tính: (3x² - 2y) - (x² + 5y)', options: ['2x² - 3y', '2x² + 3y', '2x² - 7y', '4x² + 3y'], correct: 2 },
+            { id: 5, text: 'Nhân đơn thức với đa thức: 2x(x² - 3y)', options: ['2x³ - 3y', '2x³ - 6xy', 'x³ - 6xy', '2x² - 6xy'], correct: 1 },
+            { id: 6, text: 'Thực hiện phép nhân: (x - 2)(x + 3)', options: ['x² - 6', 'x² + x - 6', 'x² - x - 6', 'x² + 5x - 6'], correct: 1 },
+            { id: 7, text: 'Kết quả của phép nhân (2x + y)(2x - y) là:', options: ['4x² - y²', '2x² - y²', '4x² + y²', '4x - y'], correct: 0 },
+            { id: 8, text: 'Chia đơn thức cho đơn thức: 15x³y² : 3x²y', options: ['5x²y', '5xy²', '5xy', '12xy'], correct: 2 },
+            { id: 9, text: 'Thực hiện phép chia: (4x³ - 6x²) : 2x', options: ['2x² - 3x', '2x² - 3', '2x - 3x', '2x³ - 3x²'], correct: 0 },
+            { id: 10, text: 'Đa thức A = x² - 2xy + y² có giá trị tại x = 12, y = 2 là:', options: ['144', '100', '140', '120'], correct: 1 },
+            { id: 11, text: 'Bậc của đa thức P = x(x² - 1) - x³ là:', options: ['3', '2', '1', '0'], correct: 2 },
+            { id: 12, text: 'Rút gọn biểu thức: x(x - 1) - x² + 2x', options: ['-x', '3x', 'x', 'x² + x'], correct: 2 },
+            { id: 13, text: 'Thực hiện phép chia: (5x⁴y³ - 10x³y⁴) : 5x²y²', options: ['x²y - 2xy²', 'x²y - 2x²y', 'xy² - 2xy²', 'x²y + 2xy²'], correct: 0 },
+            { id: 14, text: 'Tích của đa thức x² - 2x + 1 và đơn thức x là:', options: ['x³ - 2x + 1', 'x³ - 2x² + x', 'x³ + 2x² + x', 'x³ - 2x² + 1'], correct: 1 },
+            { id: 15, text: 'Rút gọn biểu thức: 2x(3x - 1) - 6x(x + 1)', options: ['-8x', '4x', '-4x', '12x² - 8x'], correct: 0 },
+        
+            // --- CHƯƠNG 2: HẰNG ĐẲNG THỨC ĐÁNG NHỚ ---
+            { id: 16, text: 'Khai triển hằng đẳng thức (x + 4)²', options: ['x² + 4x + 16', 'x² + 8x + 16', 'x² + 16', 'x² + 8x + 8'], correct: 1 },
+            { id: 17, text: 'Khai triển hằng đẳng thức (3x - 1)²', options: ['9x² - 3x + 1', '9x² - 6x - 1', '9x² - 6x + 1', '3x² - 6x + 1'], correct: 2 },
+            { id: 18, text: 'Viết biểu thức sau dưới dạng đa thức: (x - 5)(x + 5)', options: ['x² - 10', 'x² + 25', 'x² - 5', 'x² - 25'], correct: 3 },
+            { id: 19, text: 'Khai triển (2x + 3y)²', options: ['4x² + 6xy + 9y²', '4x² + 12xy + 9y²', '2x² + 12xy + 3y²', '4x² + 9y²'], correct: 1 },
+            { id: 20, text: 'Khai triển biểu thức (x - 1/2)²', options: ['x² - x + 1/4', 'x² - 1/2x + 1/4', 'x² - 1/4', 'x² + x + 1/4'], correct: 0 },
+            { id: 21, text: 'Khai triển lập phương của một tổng: (x + 2)³', options: ['x³ + 8', 'x³ + 6x² + 12x + 8', 'x³ + 2x² + 4x + 8', 'x³ + 6x² + 6x + 8'], correct: 1 },
+            { id: 22, text: 'Khai triển lập phương của một hiệu: (x - 3)³', options: ['x³ - 9x² + 27x - 27', 'x³ - 3x² + 9x - 27', 'x³ - 27', 'x³ + 9x² - 27x - 27'], correct: 0 },
+            { id: 23, text: 'Viết biểu thức thành tích: x³ + 8', options: ['(x + 2)(x² - 4x + 4)', '(x + 2)(x² - 2x + 4)', '(x + 2)³', '(x - 2)(x² + 2x + 4)'], correct: 1 },
+            { id: 24, text: 'Viết biểu thức thành tích: 8x³ - 1', options: ['(2x - 1)(4x² + 2x + 1)', '(2x - 1)(4x² - 2x + 1)', '(2x - 1)³', '(2x - 1)(2x² + 2x + 1)'], correct: 0 },
+            { id: 25, text: 'Đa thức 25x² - 20xy + 4y² viết gọn thành:', options: ['(5x + 2y)²', '(5x - 4y)²', '(5x - 2y)²', '(25x - 2y)²'], correct: 2 },
+            { id: 26, text: 'Tính nhanh giá trị: 101²', options: ['10001', '10201', '10101', '10211'], correct: 1 },
+            { id: 27, text: 'Tính nhanh giá trị: 99²', options: ['9901', '9991', '9891', '9801'], correct: 3 },
+            { id: 28, text: 'Tính nhanh giá trị: 52 × 48', options: ['2504', '2496', '2500', '2596'], correct: 1 },
+            { id: 29, text: 'Tính nhanh: 87² + 26 × 87 + 13²', options: ['10000', '8700', '13000', '9000'], correct: 0 },
+            { id: 30, text: 'Tính nhanh: 75² - 25²', options: ['4000', '6000', '5000', '5500'], correct: 2 },
+            { id: 31, text: 'Rút gọn biểu thức: (x + y)² - 2xy', options: ['x² - y²', 'x² + y²', '0', '2x² + 2y²'], correct: 1 },
+            { id: 32, text: 'Rút gọn biểu thức: (x - 2)² - (x + 2)²', options: ['-8x', '8x', '-4', '0'], correct: 0 },
+            { id: 33, text: 'Điền đơn thức vào chỗ trống: (x + ...)² = x² + 6x + 9', options: ['2', '3', '4', '9'], correct: 1 },
+            { id: 34, text: 'Đa thức 1 - 8x³ viết thành tích là:', options: ['(1 - 2x)(1 - 2x + 4x²)', '(1 - 2x)³', '(1 - 2x)(1 + 2x + 4x²)', '(1 + 2x)(1 - 2x + 4x²)'], correct: 2 },
+            { id: 35, text: 'Rút gọn: (x + 1)³ - 3x(x + 1) - x³', options: ['1', '3x', '0', '-1'], correct: 0 },
+        
+            // --- PHÂN TÍCH ĐA THỨC THÀNH NHÂN TỬ ---
+            { id: 36, text: 'Phân tích đa thức thành nhân tử: 4x² - 6x', options: ['2x(2x - 3)', '2x(2x - 6)', 'x(4x - 6)', '2(2x² - 3x)'], correct: 0 },
+            { id: 37, text: 'Phân tích thành nhân tử: x²y - xy²', options: ['xy(x + y)', 'x(xy - y²)', 'xy(x - y)', 'y(x² - xy)'], correct: 2 },
+            { id: 38, text: 'Phân tích bằng hằng đẳng thức: x² - 6x + 9', options: ['(x + 3)²', '(x - 3)²', '(x - 9)²', 'x(x - 6) + 9'], correct: 1 },
+            { id: 39, text: 'Phân tích bằng hằng đẳng thức: 4x² - 25', options: ['(2x - 5)²', '(4x - 5)(4x + 5)', '(2x - 25)(2x + 25)', '(2x - 5)(2x + 5)'], correct: 3 },
+            { id: 40, text: 'Phân tích đa thức thành nhân tử: x³ + 125', options: ['(x + 5)(x² + 5x + 25)', '(x + 5)(x² - 5x + 25)', '(x + 5)³', '(x - 5)(x² + 5x + 25)'], correct: 1 },
+            { id: 41, text: 'Phân tích bằng phương pháp nhóm: x² - xy + x - y', options: ['(x - y)(x - 1)', '(x + y)(x - 1)', '(x - y)(x + 1)', '(x + y)(x + 1)'], correct: 2 },
+            { id: 42, text: 'Phân tích thành nhân tử: ax + ay - bx - by', options: ['(a - b)(x + y)', '(a + b)(x - y)', '(a - b)(x - y)', '(a + b)(x + y)'], correct: 0 },
+            { id: 43, text: 'Phân tích phối hợp HĐT và nhóm: x² - y² - 2x + 1', options: ['(x - 1 - y)(x - 1 + y)', '(x - y - 1)(x + y - 1)', '(x - y)(x - 2 + y)', '(x - 1 - y)²'], correct: 0 },
+            { id: 44, text: 'Phân tích thành nhân tử: x² - 4y² + 4y - 1', options: ['(x - 2y - 1)(x + 2y - 1)', '(x - 2y + 1)(x + 2y - 1)', '(x - 2y + 1)(x + 2y + 1)', '(x - 2y)(x + 2y - 1)'], correct: 1 },
+            { id: 45, text: 'Phân tích thành nhân tử: 3x² - 12', options: ['3(x - 4)', '3(x - 2)²', '3(x - 2)(x + 2)', '(3x - 6)(x + 2)'], correct: 2 },
+            { id: 46, text: 'Phân tích thành nhân tử: 2x³ - 8x', options: ['2x(x - 4)', '2x(x - 2)²', '2x(x - 2)(x + 2)', '2(x³ - 4x)'], correct: 2 },
+            { id: 47, text: 'Phân tích thành nhân tử: 5x² - 10xy + 5y²', options: ['5(x - y)²', '5(x + y)²', '5(x - y)(x + y)', '(5x - 5y)²'], correct: 0 },
+            { id: 48, text: 'Phân tích đa thức thành nhân tử: x³ - 3x² + 3x - 1', options: ['(x + 1)³', '(x - 1)³', '(x - 1)(x² + x + 1)', 'x(x² - 3x + 3) - 1'], correct: 1 },
+            { id: 49, text: 'Phân tích thành nhân tử (tách hạng tử): x² - 5x + 6', options: ['(x - 1)(x - 6)', '(x + 2)(x + 3)', '(x - 2)(x - 3)', '(x - 6)(x + 1)'], correct: 2 },
+            { id: 50, text: 'Phân tích thành nhân tử: x² + 4x + 3', options: ['(x + 1)(x + 3)', '(x - 1)(x - 3)', '(x + 2)(x + 2)', '(x + 1)(x - 4)'], correct: 0 },
+            { id: 51, text: 'Phân tích thành nhân tử: a² - b² + a + b', options: ['(a + b)(a - b + 1)', '(a - b)(a + b + 1)', '(a + b)(a - b - 1)', '(a - b)(a - b + 1)'], correct: 0 },
+            { id: 52, text: 'Phân tích thành nhân tử: x(y - 1) - y(y - 1)', options: ['(y - 1)(x + y)', '(y - 1)(x - y)', '(x - 1)(y - x)', '(y - 1)(x - 1)'], correct: 1 },
+            { id: 53, text: 'Phân tích thành nhân tử: x² - 2xy + y² - z²', options: ['(x - y - z)(x - y + z)', '(x - y - z)²', '(x + y - z)(x + y + z)', '(x - y)(x - y - z)'], correct: 0 },
+            { id: 54, text: 'Phân tích đa thức: 4x³ - 4x² + x', options: ['x(2x + 1)²', 'x(4x - 1)²', 'x(2x - 1)²', '4x(x - 1)²'], correct: 2 },
+            { id: 55, text: 'Phân tích thành nhân tử: x² - x - 12', options: ['(x - 3)(x + 4)', '(x + 3)(x - 4)', '(x - 2)(x + 6)', '(x + 2)(x - 6)'], correct: 1 },
+        
+            // --- TÌM X VÀ BÀI TẬP TỔNG HỢP ---
+            { id: 56, text: 'Tìm x biết: x(x - 2) = 0', options: ['x = 2', 'x = 0', 'x = 0 hoặc x = 2', 'x = -2'], correct: 2 },
+            { id: 57, text: 'Tìm x biết: x² - 9 = 0', options: ['x = 3', 'x = -3', 'x = 9', 'x = 3 hoặc x = -3'], correct: 3 },
+            { id: 58, text: 'Tìm x biết: (x - 3)² = 16', options: ['x = 7 hoặc x = -1', 'x = 7', 'x = 1', 'x = 7 hoặc x = 1'], correct: 0 },
+            { id: 59, text: 'Tìm x biết: x² - 4x + 4 = 0', options: ['x = -2', 'x = 2', 'x = 4', 'x = 0'], correct: 1 },
+            { id: 60, text: 'Tìm x biết: 2x² - 8x = 0', options: ['x = 4', 'x = 0 hoặc x = 4', 'x = -4', 'x = 0 hoặc x = -4'], correct: 1 },
+            { id: 61, text: 'Tìm x biết: x³ - x = 0', options: ['x = 0', 'x = 1 hoặc x = -1', 'x = 0 hoặc x = 1', 'x = 0; x = 1 hoặc x = -1'], correct: 3 },
+            { id: 62, text: 'Tìm x biết: x(x - 5) - x² = 10', options: ['x = 2', 'x = -5', 'x = -2', 'x = 5'], correct: 2 },
+            { id: 63, text: 'Tìm x biết: (2x - 1)² - (2x + 1)² = 8', options: ['x = 1', 'x = -1', 'x = 2', 'x = -2'], correct: 1 },
+            { id: 64, text: 'Tìm x biết: (x - 4)(x + 4) - x² = 3x', options: ['x = 16/3', 'x = -16/3', 'x = 16', 'x = -16'], correct: 1 },
+            { id: 65, text: 'Tính giá trị biểu thức: x³ + 3x² + 3x + 1 tại x = 9', options: ['1000', '729', '100', '900'], correct: 0 },
+            { id: 66, text: 'Rút gọn biểu thức: (x - y)(x² + xy + y²)', options: ['x³ + y³', 'x³ - y³', '(x - y)³', 'x² - y²'], correct: 1 },
+            { id: 67, text: 'Thu gọn: (a + b)³ - (a - b)³ - 2b³', options: ['6ab²', '2a³', '6a²b', '0'], correct: 2 },
+            { id: 68, text: 'Thực hiện phép chia: (x³ - 8) : (x - 2)', options: ['x² - 4x + 4', 'x² - 2x + 4', 'x² + 2x + 4', 'x² + 4'], correct: 2 },
+            { id: 69, text: 'Rút gọn: (x - 2)(x + 2) - x²', options: ['4', '-4', '2x²', '0'], correct: 1 },
+            { id: 70, text: 'Biểu thức (x - y)² bằng biểu thức nào sau đây?', options: ['(y - x)²', '-(x - y)²', 'x² - y²', '(-x - y)²'], correct: 0 }
         ];
-
         // =========================================================================
         // KHUNG MẪU CẦU THỦ BẰNG ẢNH PNG (Bạn có thể thêm nhiều cầu thủ dựa trên cấu trúc này)
         // =========================================================================
@@ -823,7 +831,7 @@
             
             const [questionBank, setQuestionBank] = useState(() => {
                 try {
-                    const saved = localStorage.getItem('fc_algebra_questions_v3');
+                    const saved = localStorage.getItem('fc_algebra_questions_v4');
                     return saved ? JSON.parse(saved) : DEFAULT_QUESTIONS;
                 } catch (e) { return DEFAULT_QUESTIONS; }
             });
@@ -893,7 +901,7 @@
             }, [unlockedCards]);
 
             useEffect(() => {
-                localStorage.setItem('fc_algebra_questions_v3', JSON.stringify(questionBank));
+                localStorage.setItem('fc_algebra_questions_v4', JSON.stringify(questionBank));
             }, [questionBank]);
 
             // CƠ CHẾ VAR PHÁT HIỆN GIAN LẬN
